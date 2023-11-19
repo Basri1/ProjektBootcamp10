@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RemoteBizHub</title>
+    <style>
+        /* Stilizimi për divin që përmban elementet h1 dhe h2 */
+        body {
+            margin: 0; /* Fshirja e margin-it default të body */
+            padding: 0; /* Fshirja e padding-ut default të body */
+        }
+
+
+        .background-image {
+            background-image: url('./assets/img/futureofwork.jpg');
+            background-size: 970px;
+            background-position: left;
+            text-align: center;
+            padding-bottom: 140px;
+            margin-top: 0px;
+        }
+
+        /* Stilizimi për elementet h1 dhe h2 brenda div-it */
+        .background-image h1 {
+            color: rgb(43, 6, 206);
+            font-style: italic;
+            border: 10px solid shadow; /* Nuk është e qartë se çfarë do të thotë "30px solid shadow" - mund ta ndryshoni bazuar në dëshirat tuaja */
+        }
+
+        .background-image h1 span {
+            color: #0e1086;
+        }
+
+        .background-image h2 {
+            color: rgb(40, 20, 156);
+        }
+        div {
+            text-align: center;
+            padding-bottom: 1px;
+            margin-top: 10px; /* Mund ta ndryshoni vlerën bazuar në preferencat tuaja */
+        }
+        
+        /* Stilizimi për elementin h1 brenda div-it */
+        h1 {
+            color: blue;
+            font-style: italic;
+            border: 30px solid shadow; /* Nuk është e qartë se çfarë do të thotë "30px solid shadow" - mund ta ndryshoni bazuar në dëshirat tuaja */
+        }
+        
+        h1 span {
+            color: #0e1086;
+        }
+        
+        /* Stilizimi për elementin h2 brenda div-it */
+        h2 {
+            color: bisque;
+        }
+        
+        /* Stilizimi për formën dhe kontainerin e formave */
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 50px; /* Mund ta ndryshoni vlerën bazuar në preferencat tuaja */
+        }
+        
+        .forms-container {
+            display: flex;
+            overflow: hidden;
+        }
+        
+        .form {
+            max-width: 300px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+            margin-right: 20px;
+            display: none;
+        }
+        
+        .form:target {
+            display: block;
+        }
+        
+        /* Stilizimi për etiketat dhe inputet */
+        label {
+            display: block;
+            margin: 10px 0 5px;
+            color: #555;
+        }
+        
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+        }
+        
+        /* Stilizimi për inputin e tipit file */
+        input[type="file"] {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+        }
+        
+        /* Stilizimi për butonin submit */
+        input[type="submit"] {
+            background-color: #2210c2;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+        
+        input[type="submit"]:hover {
+            background-color: #160b7e;
+        }
+        
+        /* Stilizimi për etiketat h2 dhe tabs */
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+        
+        .tabs {
+            text-align: center;
+            margin-top: 20px;
+        }
+        
+        .tabs a {
+            display: inline-block;
+            padding: 10px;
+            background-color: #534caf;
+            color: white;
+            border-radius: 3px;
+            margin-right: 10px;
+            text-decoration: none;
+        }
+        
+        .tabs a:hover {
+            background-color: #45a049;
+        }
+        
+        /* Stilizimi për header-in dhe navigimin horizontal */
+        header {
+            background-color: #402dad;
+            overflow: hidden;
+            padding: auto;
+            margin: 1px;
+        }
+        
+        /* Stilizimi për navbar horizontal */
+        .navbar-horizontal {
+            background-color: #402dad;
+            overflow: hidden;
+            padding: auto;
+            margin: 10px;
+        }
+        
+        .navbar-horizontal ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .navbar-horizontal a {
+            float: left;
+            display: inline-block;
+            color: rgb(230, 243, 232);
+            text-align: center;
+            padding: 4px 40px;
+            text-decoration: violet;
+        }
+        
+        .navbar-horizontal a:hover {
+            background-color: #1a1c8a;
+            color: rgb(165, 48, 159);
+            width: 300px;
+        }
+        
+        /* Stilizimi për navbar vertical */
+        .navbar-vertical {
+            background-color: #0e1086;
+            width: 300px;
+            float: left;
+        }
+        
+        .navbar-vertical a {
+            display: block;
+            color: white;
+            text-align: left;
+            padding: 12px 16px;
+            text-decoration: none;
+        }
+        
+        .navbar-vertical ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .navbar-vertical ul li {
+            position: relative;
+        }
+        
+        .navbar-vertical ul li a {
+            display: block;
+            color: white;
+            text-align: left;
+            padding: 12px 16px;
+            text-decoration: none;
+        }
+        
+        .navbar-vertical ul li a:hover {
+            text-shadow: #007BFF;
+            background-color: #2c368f;
+        }
+        
+        .navbar-vertical ul li ul {
+            display: none;
+            position: absolute;
+            left: 100%;
+            top: 0;
+            background-color: #a34897;
+        }
+        
+        .navbar-vertical ul li:hover ul {
+            display: block;
+        }
+        
+        .navbar-vertical ul li ul li {
+            display: block;
+            width: 150%;
+        }
+        
+        /* Stilizimi për aside */
+        aside {
+            float: left;
+            margin-right: 20px;
+        }
+        
+        /* Stilizimi për form-container */
+        .form-container {
+            max-width: 300px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(1, 1, 1, 1.1);
+        }
+        
+        /* Stilizimi për label */
+        label {
+            display: block;
+            margin-bottom: 10px;
+            color: #555;
+        }
+        
+        /* Stilizimi për input[type="text"] dhe textarea */
+        input[type="text"],
+        textarea {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+        }
+        
+        /* Stilizimi për input[type="file"] */
+        input[type="file"] {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+        }
+        
+        /* Stilizimi për input[type="submit"] */
+        input[type="submit"] {
+            background-color: #2210c2;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+        
+        input[type="submit"]:hover {
+            background-color: #160b7e;
+        }
+        
+        /* Stilizimi për h1 */
+        h1 {
+            text-align: center;
+            color: blueviolet;
+            border: shadow 30px;
+        }
+        
+        .section {
+                    background-image: url(); /* Zëvendëso me emrin e imazhit të duhur */
+            background-size: contain; /* Përdor vlerën 'contain' për të përshtatur madhësinë */
+            background-position: center;
+            color: rgb(10, 20, 117); /* Ngjyra e tekstit në seksion */
+            padding: 20px; /* Zvogëlo vlerën e padding për të zvogëluar madhësinë e seksionit */
+            margin-top: 10px;
+            margin-left: 360px;
+            padding-top: 10;
+            padding-left: 100px;
+            padding-right: 100px;
+            border: 3px solid #675e8f;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        #home {
+            background-image: url('./assets/img/home.section.jpg');
+            background-size: cover;
+        }
+
+        #about-us {
+            background-image: url('path_to_your_image_about_us.jpg');
+            background-size: cover;
+        }
+
+
+
+
+    </style>
+</head>
+
+<div class="background-image">
+    <h1>RemoteBizHub</h1>
+    <h2>BRIDGING DISTANCES, CONNECTING SUCCESS!</h2>
+</div>
+<body>
+    <form action="">
+        <div class="forms-container">
+            <div id="login" class="form">
+                <h2>Login</h2>
+                <label for="loginUsername">Username:</label>
+                <input type="text" id="loginUsername" name="loginUsername" required>
+                <label for="loginPassword">Password:</label>
+                <input type="password" id="loginPassword" name="loginPassword" required>
+                <input type="submit" value="Login">
+            </div>
+            <div id="signup" class="form">
+                <h2>Sign Up</h2>
+                <label for="signupUsername">Username:</label>
+                <input type="text" id="signupUsername" name="signupUsername" required>
+                <label for="signupPassword">Password:</label>
+                <input type="password" id="signupPassword" name="signupPassword" required>
+                <label for="confirmPassword">Confirm Password:</label>
+                <input type="password" id="confirmPassword" name="confirmPassword" required>
+                <input type="submit" value="Sign Up">
+            </div>
+        </div>
+        <div class="tabs">
+            <a href="#login">Login</a>
+            <a href="#signup">Sign up</a>
+        </div>
+    </form>
+    <header>
+        <div class="flex-container">
+            <nav class="navbar-horizontal">
+                <ul>
+                    <a href="#home">Home</a>
+                    <a href="#about-us">About Us</a>
+                    <a href="#our-service">Our Service</a>
+                    <a href="#portofolio">Portofoli</a>
+                    <a href="#blog">Blog</a>
+                    <a href="#testimonial">Testimonial</a>
+                    <a href="#contact">Contact</a>
+                    <a href="#work-with-us">Work with Us</a>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <main>
+        <div>
+            <div class="intro">
+                <h1>Here you can find our services</h1>
+            </div>
+            <div class="flex-container">
+                <div>
+                    <aside>
+                        <div class="flex-container" >
+                            <nav  class="navbar-vertical">
+                                <ul>
+                                    <li>
+                                        <a href="#business-consultant">Business Consultant</a>
+                                        <ul>
+                                            <li><a href="#menaxhim-projektesh">Menaxhimi i projekteve</a></li>
+                                            <li><a href="#Accounting-and-Bookkeeping">Accounting and Bookkeeping</a></li>
+                                            <li><a href="#Freelance-Writer: ">Freelance Writer: </a></li>
+                                            <li><a href="#">Analizë e strategjis</a></li>
+                                            <li><a href="#">Zhvillimi i tregut dhe marketingut</a></li>
+                                            <li><a href="#">Inovacioni dhe zhvillimi i produkteve</a></li>
+                                            <li><a href="#">Menaxhimi i burimeve njerëzore</a></li>
+                                            <li><a href="#">Teknologjia dhe IT</li>
+                                            <li><a href="#">Efikasiteti i operacioneve</a></li>
+                                            <li><a href="#">Zhvillimi i liderëve</a></li>
+                                            <li><a href="#">Planifikimi i suksesit të afatgjatë</a></li>
+                                            <li><a href="#Proofreader-Business">Proofreader Business</a></li>
+                                            <li><a href="Career-Coach">Career Coach</a></li>
+                                            <li><a href="Life-Coach">Life Coach</a></li>
+                                            <li><a href="#Digital-Marketing">Digital Marketing</a></li>
+                                            <li><a href="#Social-Media-Management">Social Media Management</a></li>
+                                            <li><a href="#Online-Tutoring-Business">Online Tutoring Business</a></li>
+                                        </ul>
+                                    </li>
+                                    <li><a href="#web-developing">Web Developing </a></li>
+                                    <li><a href="#software-Developer">Software Developer</a></li>
+                                    <li><a href="#Affiliate-Marketing">Affiliate-Marketing</a></li>
+                                    <li><a href="#Graphic-Designer">Graphic Designer</a></li>
+                                    <li><a href="#Real-Estate-Agent">Real Estate Agent</a></li>
+                                    <li><a href="#Property-Manager">Property Manager</a></li>
+                                    <li><a href="#eCommerce-Reseller-Business">eCommerce Reseller Business</a></li>
+                                    <li><a href="#eBay-Reselling">eBay Reselling</a></li>
+                                    <li><a href="#Event-Planner">Event Planner</a></li>
+                                    <li><a href="#Virtual Assistant">Virtual Assistant</a></li>
+                                    <li><a href="Online Tutoring Business">Online Tutoring Business</a></li>
+                                    <li><a href="Voiceover Business">Voiceover Business</a></li>
+                                    <li><a href="Photography Business">Photography Business</a></li>
+                                    <li><a href="Nanny-or-Childcare-Services">Nanny or Childcare Services</a></li>
+                                    <li><a href="Makeup Artist">Makeup Artist</a></li>
+                                    <li><a href="Lawn-Care-and-Landscaping-Business">Lawn Care and Landscaping Business</a></li>
+                                    <li><a href="Painter">Painter</a></li>
+                                    <li><a href="Cleaning-Business">Cleaning Business</a></li>
+                                    <li><a href="Print-on-Demand-Business">Print-on-Demand Business</a></li>
+                                    <li><a href="Vending Machine Business">Vending Machine Business</a></li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </aside>
+                    <aside>
+                        <div class="form-container">
+                            <h1> <span>Here, enter the data for the project you want to develop</span></h1>
+                            <label for="showFormToggle">Enter all the required data for...</label>
+                            <input type="checkbox" id="showFormToggle">
+                            <label for="showFormToggle">Show Form</label>
+                            <form action="process_data.php" method="post">
+                                <label for="fullName">Full Name:</label>
+                                <input type="text" id="fullName" name="fullName" required>
+                                <label for="projectTitle">Project Title:</label>
+                                <input type="text" id="projectTitle" name="projectTitle" required>
+                                <label for="dataTypes">Data Types:</label>
+                                <textarea id="dataTypes" name="dataTypes" rows="4" required></textarea>
+                                <label for="purpose">Purpose:</label>
+                                <textarea id="purpose" name="purpose" rows="4" required></textarea>
+                                <label for="consent">Consent:</label>
+                                <label for="consent">I agree to the terms outlined above.</label>
+                                <label for="documents">Select Documents:</label>
+                                <input type="file" id="documents" name="documents" accept=".pdf, .doc, .docx, .jpg, .jpeg, .png, .xls, .xlsx, .csv, .txt, .zip, .rar, .gif" required>
+                                <br><br>
+                                <input type="submit" value="Submit">
+                            </form>
+                        </div>
+                    </aside>
+                </div> 
+            </div> 
+        </div>      
+    </main>
+    <div>
+        <section class= "section" id="home">
+            <h1>Home</h1>
+            <h3>Welcome to <strong>RemoteBizHub </strong>- Your Partner in Diverse Business Ventures!</h3>
+            <p>Embark on a journey of entrepreneurial success with RemoteBizHub, your one-stop destination for a wide array of professional services. We specialize in supporting and empowering individuals in various business domains, ensuring your ventures thrive. Here's a glimpse into the diverse services we offer:</p>
+            <h3>1.Business Consulting:</h3>
+            <p>Leverage our expertise to redefine your business strategy, enhance operations, and achieve sustainable growth.</p>
+            <h3>2. Social Media Management:</h3>
+            <p>Elevate your online presence with our social media management services, driving engagement and expanding your digital reach.</p>
+            <h3>3.Nanny or Childcare Services:</h3>
+            <p>Ensure the well-being of your little ones with our reliable and professional nanny and childcare services.</p>
+            <h3>4. Cleaning Business:</h3>
+            <p>Make a lasting impression with our top-notch cleaning services, tailored to meet the unique needs of residential and commercial sp</p>
+            <h3>5.Software Development:</h3>
+            <p>Transform your digital ideas into reality with our skilled software developers, creating innovative solutions for your business.</p>
+            <h3>6.. Vending Machine Business:</h3>
+            <p>Explore the lucrative world of vending machines with our guidance, from selection to strategic placement and management.</p>
+            <h3>7. Virtual Assistant</h3>
+            <p>Streamline your tasks and maximize productivity with our virtual assistant services, providing efficient administrative support.</p>
+            <h3>8. eCommerce Reseller Business:</h3>
+            <p>Enter the world of e-commerce with confidence. Our expertise ensures a smooth and profitable reselling vent</p>
+            <h3>9.Freelance Writer:</h3>
+            <p>Harness the power of words with our freelance writing services, creating compelling content that captivates your audience</p>
+            <h3>10. Digital Marketing:</h3>
+            <p>Drive your business forward with our comprehensive digital marketing strategies, from SEO to social media campaigns.
+            </p>
+            <h3>11. Makeup Artist:</h3>
+            <p>Unleash your creativity in the beauty industry with our makeup artist services, creating stunning looks for any occasion.
+            </p>
+            <h3>12.Painter:</h3>
+            <p>Transform spaces with our skilled painters, bringing artistic flair and precision to every stroke.
+            </p>
+            <h3>12.Graphic Designer:</h3>
+            <p>Make a visual impact with our graphic design services, creating stunning visuals that align with your brand.
+            </p>
+            <h3>14.Lawn Care and Landscaping Business:</h3>
+            <p>Cultivate beautiful outdoor spaces with our professional lawn care and landscaping services.
+            </p>
+            <h3>15.Event Planner:</h3>
+            <p>Create unforgettable events with our event planning expertise, from concept to flawless execution.
+            </p>
+            <h3>16.Photography Business:</h3>
+            <p>Capture moments that last a lifetime with our photography services, delivering professional and artistic imagery.
+            </p>
+            <h3>17.Proofreader Business:</h3>
+            <p>Ensure polished and error-free content with our proofreading services, adding finesse to written materials.
+            </p>
+            <h3>18.Online Tutoring Business:</h3>
+            <p>Inspire learning and academic success with our online tutoring services, personalized for each student.
+            </p>
+            <h3>19.Real Estate Agent:</h3>
+            <p>Navigate the real estate market confidently with our experienced real estate agents, ensuring a smooth property transaction.
+            </p>
+            <h3>20.Voiceover Business:</h3>
+            <p>Add a professional touch to your projects with our voiceover services, delivering impactful narration and audio content.
+            </p>
+            <h3>21.Property Manager:</h3>
+            <p>Optimize property investments with our property management services, ensuring seamless operations and tenant satisfaction.
+            </p>
+            <h3>22.Accounting and Bookkeeping:</h3>
+            <p>Maintain financial health with our accounting and bookkeeping services, providing accurate and organized financial records.
+            </p>
+            <h3>23. Life Coach:</h3>
+            <p>Empower personal growth and development with our life coaching services, guiding individuals to achieve their goals.
+            </p>
+            <h3>24.eBay Reselling:</h3>
+            <p>Navigate the world of online selling with our eBay reselling expertise, maximizing profits and market presence.
+            </p>
+            <h3>25.Career Coach:</h3>
+            <p>Chart a path to professional success with our career coaching services, offering guidance and strategies for advancement.
+            </p>
+            <h3>26.Affiliate Marketing:</h3>
+            <p>Monetize your online presence with our affiliate marketing strategies, creating revenue streams through strategic partnerships.
+            </p>
+            <h3>27.Print-on-Demand Business:</h3>
+            <p>Explore the possibilities of print-on-demand with our services, turning creative ideas into tangible products.
+            </p>
+            <p>Embark on your entrepreneurial journey with confidence and expertise. At RemoteBizHub, we're here to turn your ideas into success stories. Let's build your legacy together!</p>
+            <button class="read-more-button">Read More</button>
+        </section>
+        <section class="section" id="about-us">
+            <h1>About Us</h1>
+            <h2>Welcome to RemoteBizHub - Your Gateway to Diverse Business Success!</h2>
+            <p>At RemoteBizHub, we are more than just a service provider; we are your partners in entrepreneurial exploration and success. Offering a comprehensive range of professional services, we specialize in empowering individuals across various business domains, ensuring your ventures not only survive but thrive. Explore the spectrum of services that can transform your business landscape:</p>
+            <p><strong>Business Consulting,</stron><strong>Social Media Management,</strong> <strong>Nanny or Childcare Services,</strong>
+            <strong>Cleaning Business,</strong><strong> Developmen,</strong><strong>Vending Machine Business,</strong><strong> Assistant,</strong>
+            <strong>eCommerce Reseller Business,</strong> <strong>Freelance Writer,</strong> <strong>Digital Marketing,</strong><strong>Makeup Artist,</strong><strong>Painter,</strong><strong>Graphic Designer,</strong><strong>Lawn Care and Landscaping Business,</strong>
+            <strong>Event Planner,</strong><strong>Photography Business,</strong><strong>Proofreader Business,</strong> <strong>Online Tutoring Business,</strong> <strong>Real Estate Agent</strong>
+            <strong>Real Estate Agent,</strong> <strong>Voiceover Business,</strong> <strong>Voiceover Business,</strong> <strong>Property Manager,</strong> <strong>Accounting and Bookkeeping,</strong> <strong>Life Coach,</strong> <strong>eBay Reselling,</strong> <strong>Career Coach,</strong> <strong>Affiliate Marketing,</strong> <strong>Print-on-Demand Business</strong></p>
+            <p>Welcome to RemoteBizHub—where your entrepreneurial dreams find their wings! Partner with us, and let's build success together.</p>
+            <button class="read-more-button" >Read More</button>
+            <img class="image" src="team.jpg" alt="our team" />
+        </section>
+        <section class="section" id="our-service">
+            <h1>Our Service</h1>
+            <p>Welcome to RemoteBizHub, your trusted ally in entrepreneurial success. We transcend traditional service providers, evolving into your dedicated partners for business exploration and triumph. Specializing in a diverse range of professional services, our mission is to empower individuals across various business domains, ensuring not just survival but flourishing ventures.
+                Explore our extensive portfolio, encompassing Business Consulting, Social Media Management, Nanny or Childcare Services, Cleaning Business, Software Development, Vending Machine Business, Virtual Assistant, eCommerce Reseller Business, Freelance Writing, Digital Marketing, Makeup Artistry, Painting, Graphic Design, Lawn Care, Event Planning, Photography, Proofreading, Online Tutoring, Real Estate, Voiceover Services, Property Management, Accounting, Life Coaching, eBay Reselling, Career Coaching, Affiliate Marketing, and Print-on-Demand.
+                Welcome to RemoteBizHub, where your entrepreneurial aspirations take flight. We invite you to partner with us on this journey of building success together. Our dedicated team, Ekipi Ynë, is committed to providing unparalleled support, innovative solutions, and expert guidance tailored to your unique business needs. Let's embark on this exciting venture together, shaping a future of thriving enterprises.</p>
+        </section>
+        <section class="section" id="portofolio">
+                <h1>RemoteBizHub Portfolio: Showcasing Our Projects</h1>
+                <p>Welcome to the RemoteBizHub Portfolio, where we take pride in showcasing our successful projects in the fields of web development, software development, business consulting, and digital marketing. Explore the diverse range of projects that demonstrate our commitment to excellence and innovation:</p>
+                <h2>Web Development</h2>
+                <p><strong>Project: Dynamic E-Commerce Platform</strong></p>
+                <p>Experience the seamless user interface and robust functionality of our dynamic e-commerce platform. This project involved creating a user-friendly online shopping experience, incorporating secure payment gateways and responsive design.</p>
+                <h2>Software Development</h2>
+                <p><strong>Project: Customized CRM Solution</strong></p>
+                <p>Dive into our custom Customer Relationship Management (CRM) solution tailored for a client's unique needs. This project showcases our expertise in developing scalable and efficient software solutions for enhanced business operations.</p>
+                <h2>Business Consulting</h2>
+                <p><strong>Project: Strategic Growth Planning</strong></p>
+                <p>Explore our successful collaboration with a business seeking strategic growth. Our consulting services played a pivotal role in redefining their business strategy, optimizing operations, and achieving sustainable growth.</p>
+                <h2>Digital Marketing</h2>
+                <p><strong>Project: Comprehensive SEO Campaign</strong></p>
+                <p>Delve into the results of our comprehensive SEO campaign, driving increased organic traffic and improving online visibility for a client. This project highlights our proficiency in executing successful digital marketing strategies.</p>
+                <p>At RemoteBizHub, we are proud to present these projects as a testament to our expertise and commitment to delivering impactful solutions. Each project reflects our dedication to meeting the unique needs of our clients and achieving outstanding results. Explore further and envision how we can elevate your business.</p>
+        </section>
+        <section class="section" id="blog">
+            <h1>Blog</h2>
+            <h2>Unlocking Success: Your Go-To Service Provider for a Variety of Businesses</h2>
+            <p>Welcome to [Your Company Name], your one-stop solution for a range of professional services. Whether you're a seasoned entrepreneur or just starting your journey in the business world, we have tailored services to meet your unique needs. Let's explore how [Your Company Name] can add value to your venture in various domains.</p>
+            <h3>Business Consultant:</h3>
+            <p>Navigating the complexities of business requires expert guidance. Our seasoned business consultants bring a wealth of experience to the table, helping you make informed decisions, strategize effectively, and achieve your business goals.</p>
+            <h3>Lawn Care and Landscaping Business:</h3>
+            <p>First impressions matter, and a well-maintained outdoor space speaks volumes. Our lawn care and landscaping services ensure that your business premises make a positive impact from the moment your clients arrive.</p>
+            <h2>Conclusion:</h2>
+            <p>No matter your business venture, [Your Company Name] is dedicated to providing top-notch services tailored to your unique requirements. Partner with us, and let's embark on a journey to success together. Your vision, our expertise – the perfect combination for unparalleled growth.</p>  
+        </section>
+        <section class="section" id="contact">
+            <h2>Contact</h2>
+            <p>Contact us for more information or to start a collaboration.</p>
+            <div>
+                <h3>Contact Information</h3>
+                <p>Email: info@kompania.com</p>
+                <p>Phone: +38355899255</p>
+                <p>Address: Street 123, City: Pristina</p>
+            </div>
+        </section>
+        <section  class="section"  id="work-with-us">
+            <h3>Project Data Usage Consent Form</h3>
+            <div>
+                <p><em>Project Title: [Your Project Title]</em></p>
+                <p>I, [Participant's Full Name], hereby grant permission for the use of the data I provide for the aforementioned project. I understand and agree to the following terms:</p>
+                    <ol>
+                        <li><strong>Purpose:</strong> The data collected will be used exclusively for the specified project, [Project Title], and will not be used for any other purpose without my explicit consent.</li>
+                        <li><strong>Data Collection:</strong> I agree to provide the necessary data as outlined in the project requirements. This may include [list types of data, e.g., surveys, interviews, images, etc.].</li>
+                        <li><strong>Anonymity:</strong> I understand that all personal information will be kept confidential, and any published results will not include personally identifiable information without additional consent.</li>
+                        <li><strong>Data Storage:</strong> The collected data will be securely stored and accessible only to authorized personnel involved in the project. Data will be retained for [specify duration] and then securely destroyed.</li>
+                        <li><strong>Publication:</strong> I acknowledge that the project findings may be published, but my identity will remain confidential unless I provide separate consent for disclosure.</li>
+                        <li><strong>Withdrawal:</strong> I have the right to withdraw from the project at any time without penalty or prejudice.</li>
+                    </ol>
+                <p><strong>Participant's Signature:</strong> _____________________ Date: ________________</p>
+        </div>
+    </section>
+        <section class="section" id="testimonial">
+            <h2>Testimoniale</h2>
+            <div class="testimonial">
+                <p>"Shërbimi ishte i jashtëzakonshëm. Ekipi i tyre është shumë i përvojshëm dhe profesional."</p>
+                <p>- Klienti 1</p>
+            </div>
+            <div class="testimonial">
+                <p>"Shërbimi ishte i jashtëzakonshëm. Ekipi i tyre është shumë i përvojshëm dhe profesional."</p>
+                <p>- Klienti 2</p>
+            </div>
+        </section>
+   
+        <section class="section" id="faq">
+            <h2>Pyetje të Shpeshta (FAQ)</h2>
+            <div>
+                <h3>Pyetja 1?</h3>
+                <p>Përgjigja për pyetjen tuaj të parë shkon këtu. Mund të jenë pyetje të ndryshme rreth shërbimeve dhe kompanisë.</p>
+            </div>
+            <div>
+                <h3>Pyetja 2?</h3>
+                <p>Përgjigja për pyetjen tuaj të dytë shkon këtu. Mund të jenë pyetje të ndryshme rreth shërbimeve dhe kompanisë.</p>
+            </div>
+        </section>
+
+
+    </div>
+
+    <div>
+        <section id="business-consultant" class="section">
+            <h2>Business Consultant</h2>
+            <h1>Elevate Your Business with Strategic Consulting Excellence</h1>
+            <p>In the dynamic landscape of today's business world, staying ahead requires more than just adaptability—it demands a strategic approach that aligns with your unique goals. At [Your Company Name], we specialize in providing unparalleled business consulting services tailored to empower your enterprise for success.</p>
+            <h2>Our Services:</h2>
+            <h2>1.Strategic Planning:</h2>
+            <p>Unlock the full potential of your business with our strategic planning services. We collaborate with you to define clear objectives, identify growth opportunities, and develop a roadmap for sustainable success.</p>
+            <h2>2.Operational Efficiency:</h2>
+            <p>Streamline your operations for maximum efficiency. Our consultants conduct thorough analyses, identify bottlenecks, and implement solutions that optimize your processes, saving both time and resources.</p>
+            <h2> <strong>3.Market Research and Analysis:</strong></h2>
+            <p>Stay ahead of the competition with our in-depth market research and analysis. We provide valuable insights into industry trends, consumer behavior, and competitor strategies, empowering you to make informed decisions.</p>
+            <h2>4.Financial Management:</h2>
+            <p>Ensure a strong financial foundation with our expertise in financial management. From budgeting and forecasting to risk management, we help you navigate the complexities of finance to secure long-term stability.</p>
+            <h2>5.Organizational Development:</h2>
+            <p>Foster a culture of innovation and growth. Our consultants work closely with your team to enhance leadership skills, improve employee engagement, and create a workplace that thrives on collaboration</p>
+            <h1>Why Choose BemoteBizHub</h1>
+            <li><h2>Proven Track Record:</h2>
+            <p>Our consultants bring a wealth of experience and a proven track record of delivering tangible results for businesses across diverse industries.</p></li>
+            <li><h2>Customized Solutions:</h2><p>We understand that each business is unique. Our consulting approach is tailored to your specific needs, ensuring that our solutions align seamlessly with your goals and challenges.</p></li>
+            <li><h2>Client-Centric Approach:</h2><p>Your success is our priority. We collaborate closely with clients, fostering a partnership that goes beyond consulting. We are committed to your long-term success.</p></li>
+            <li><h2>Innovation and Adaptability:</h2><p>In a rapidly evolving business landscape, innovation is key. We stay ahead of industry trends, integrating cutting-edge strategies to keep your business at the forefront of change.</p></li>
+            <p>Transform your business into a beacon of success with [Your Company Name]. Let us be your strategic partner in navigating challenges and seizing opportunities. Schedule a consultation today and unlock the full potential of your enterprise.</p>
+            <a class="cta-button" href="#thirrja-per-veprim">Mëso më shumë</a>
+        </section>
+        <section id="web-developing" class="section">
+            <h1>Unleash Your Digital Presence with Our Expert Web Development Services</h1>
+            <p>Welcome to RemoteBizHub, where innovation meets functionality. Elevate your business with our comprehensive web development services tailored to enhance your online presence and captivate your audience.</p>
+            <h1>Our Web Development Services:</h1>
+            <h2>1.Responsive Design:</h2>
+            <p>Craft visually stunning and responsive designs that adapt seamlessly to various devices, ensuring an unforgettable user experience on smartphones, tablets, and desktops.</p>
+            <h2>2.Custom Development Solutions:</h2>
+            <p>We go beyond the ordinary, offering bespoke development solutions that align with your unique business requirements, providing a tailored and impactful online presence.</p>
+            <h2>3.SEO Optimization:</h2>
+            <p>Propel your visibility on the web with SEO-optimized websites. Our development strategies are designed to enhance search engine rankings, driving more organic traffic to your site.</p>
+            <h2>4.Advanced Integrations:</h2>
+            <p>Harness the power of cutting-edge technologies with advanced integrations. From e-commerce functionalities to complex backend systems, we bring your website to life with seamless and sophisticated features.</p>
+            <h2>5.Project Management Expertise:</h2>
+            <p>Count on our project management proficiency to ensure a smooth and timely delivery. We coordinate every aspect of the development process, keeping you informed and in control.</p>
+            <h2>Why Choose RemoteBizHub</h2>
+            <h2>Comprehensive Expertise:</h2>
+            <p>Benefit from our extensive experience in web development across diverse industries.</p>
+            <h2>Creative Innovation:</h2>
+            <p>Our team combines creativity with innovation to deliver projects that stand out in both design and functionality.</p>
+            <h2>Client-Centric Dedication:</h2>
+            <p>We're committed to assisting our clients at every step, ensuring that your vision is translated into every line of code.</p>
+            <h2>Efficiency and Quality:</h2>
+            <p>We guarantee timely project completion while maintaining a high standard of quality throughout the development process.</p>
+            <p>Thank you for choosing <strong>RemoteBizHub</strong> for your web development project. Let's collaborate to build a powerful digital representation for your business that leaves a lasting impact on your audience.</p> 
+            <a class="cta-button" href="#">Mëso më shumë</a>
+        </section>
+        <section id="software-Developer" class="section">
+            <h2>Software Developer</h2>
+            <h1>Elevate Your Software Solutions with <span>RemoteBizHub</span></h1>
+            <p>Welcome to the forefront of innovation! At [Your Company Name], we pride ourselves on being your trusted partner in software development. Whether you're envisioning a groundbreaking application, a scalable platform, or a robust system, our team of skilled software developers is here to turn your ideas into reality.</p>
+            <h1>Our Software Development Expertise:</h1>
+            <h2>1.Custom Software Solutions:</h2>
+            <p>Tailored to your unique needs, our custom software solutions are crafted to enhance efficiency, scalability, and overall business performance.</p>
+            <h2>2.Full-Stack Development:</h2>
+            <p>From frontend to backend, our full-stack developers excel in creating seamless, integrated systems that meet the demands of modern businesses.</p>
+            <h2>3.Mobile App Development:</h2>
+            <p>Stay connected with your audience on the go. Our mobile app development ensures a captivating user experience on iOS and Android platforms.</p>
+            <h2>4.Cloud Solutions:</h2>
+            <p>Embrace the power of the cloud. We develop scalable and secure cloud solutions that optimize data management and accessibility.</p>
+            <h2>UI/UX Design Excellence:</h2>
+            <p>User experience is at the core of our designs. Our developers collaborate closely with our UI/UX team to ensure intuitive and visually appealing software interfaces.</p>
+            <h1>Why RemoteBizHub</h1>
+            <h2>Proven Track Record:</h2>
+            <p>Benefit from our successful track record of delivering software solutions that exceed expectations.</p>
+            <h2>Innovation and Adaptability:</h2>
+            <p>Stay ahead of the curve with our commitment to incorporating the latest technologies and industry trends into your software projects.</p>
+            <h2>Client-Centric Approach:</h2>
+            <p>Your satisfaction is our priority. We work collaboratively, ensuring your vision is not only met but surpassed.</p>
+            <h2>Agile Development Methodology:</h2>
+            <p>Our agile development approach ensures flexibility and responsiveness to evolving project needs, resulting in timely and effective solutions.</p>
+            <p>Unlock the full potential of your software endeavors with [Your Company Name]. Let's embark on a journey of innovation and create software solutions that propel your business to new heights.</p>
+            <a class="cta-button" href="#">Mëso më shumë</a>
+        </section>
+    </div>
+    <div>
+        <footer>
+            <p>Të gjitha të drejtat e rezervuara &copy; 2023 Kompania.</p>
+        </footer>
+    </div>
+</body>
+</html>
