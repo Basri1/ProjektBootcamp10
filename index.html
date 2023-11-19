@@ -298,18 +298,17 @@
             color: blueviolet;
             border: shadow 30px;
         }
-        
         .section {
-                    background-image: url(); /* Zëvendëso me emrin e imazhit të duhur */
-            background-size: contain; /* Përdor vlerën 'contain' për të përshtatur madhësinë */
+            background-image: url('./assets/img/home.section.jpg'); /* Përditësojeni me emrin e imazhit të duhur */
+            background-size: cover;
             background-position: center;
-            color: rgb(10, 20, 117); /* Ngjyra e tekstit në seksion */
-            padding: 20px; /* Zvogëlo vlerën e padding për të zvogëluar madhësinë e seksionit */
+            color: rgb(10, 20, 117);
+            padding: 20px;
             margin-top: 10px;
-            margin-left: 360px;
-            padding-top: 10;
-            padding-left: 100px;
-            padding-right: 100px;
+            margin-left: 20px; /* Ndryshimi nga '360px' në '20px' */
+            padding-top: 10px;
+            padding-left: 20px; /* Ndryshimi nga '100px' në '20px' */
+            padding-right: 20px; /* Ndryshimi nga '100px' në '20px' */
             border: 3px solid #675e8f;
             border-radius: 5px;
             text-align: center;
@@ -323,6 +322,21 @@
         #about-us {
             background-image: url('path_to_your_image_about_us.jpg');
             background-size: cover;
+        }
+                        /* small */
+                        /* small */
+        @media (max-width: 500px) {
+            /* ... (stilizime për ekranët e vogla) */
+        }
+        
+        /* medium */
+        @media (min-width: 501px) and (max-width: 949px) {
+            /* ... (stilizime për ekranët e mesme) */
+        }
+        
+        /* large */
+        @media (min-width: 950px) {
+            /* ... (stilizime për ekranët e mëdha) */
         }
 
 
